@@ -1,34 +1,28 @@
 #include <GL/glut.h>
+#include "blob.h"
 /*
- *  This class is a graphical interface used to interact with a blob world.
+ *  This file is a graphical interface used to interact with a blob world.
  */
+Blob blob;
 
-void drawSquare(void)
-{
-    glBegin(GL_POLYGON);
-        glVertex3f(0.0, 0.0, 0.0);
-        glVertex3f(0.5, 0.0, 0.0);
-        glVertex3f(0.5, 0.5, 0.0);
-        glVertex3f(0.0, 0.5, 0.0);
-    glEnd();
-}
-
-void displayMe(void)
+void display(void)
 {
     glClearColor(0.084,0.563,.98,0);
 	glClear(GL_COLOR_BUFFER_BIT);
-    drawSquare();
+    blob.drawSelf();
     glFlush();
 }
 
 int main(int argc, char** argv)
 {
+    blob.update();
+
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE);
     glutInitWindowSize(1300, 1300);
     glutInitWindowPosition(500, 500);
-    glutCreateWindow("Hello world :D");
-    glutDisplayFunc(displayMe);
+    glutCreateWindow("Blob World");
+    glutDisplayFunc(display);
     glutMainLoop();
     return 0;
 }
